@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Large Number Verbalizer and Calculator", "Large Number Verbalizer and Calculator\Large Number Verbalizer and Calculator.csproj", "{E8697FCC-7499-46CA-85C9-99DB4756B18A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{7049657E-CDD7-4290-A0D3-1010B87B9CDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LNVC_Library", "LNVC_Library\LNVC_Library.csproj", "{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8697FCC-7499-46CA-85C9-99DB4756B18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8697FCC-7499-46CA-85C9-99DB4756B18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8697FCC-7499-46CA-85C9-99DB4756B18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8697FCC-7499-46CA-85C9-99DB4756B18A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7049657E-CDD7-4290-A0D3-1010B87B9CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7049657E-CDD7-4290-A0D3-1010B87B9CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7049657E-CDD7-4290-A0D3-1010B87B9CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7049657E-CDD7-4290-A0D3-1010B87B9CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F258E035-0870-425F-ABD4-701C1BB8747D}
+	EndGlobalSection
+EndGlobal
