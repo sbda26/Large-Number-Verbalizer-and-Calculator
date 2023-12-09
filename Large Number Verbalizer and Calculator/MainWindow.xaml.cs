@@ -5,12 +5,12 @@
 // DONE: DISABLE CERTAIN OPERATORS IF NUMBERS ARE FLOATING POINT
 // DONE: CLEAR BUTTON
 // FAIL: TAB FROM ONE OPERAND TEXTBOX TO THE OTHER
-// TODO: SPEAKING
+// DONE: SPEAKING
 // TODO: ABOUT MENU ITEM
 // TODO: README MENU ITEM
 // TODO: HUMOR MENU ITEM
 // DONE: MED FUNCTION
-// TODO: SET SOME KIND OF SCREEN NOTIFICATION WHEN COPY BUTTON IS PRESSED
+// DONE: SET SOME KIND OF SCREEN NOTIFICATION WHEN COPY BUTTON IS PRESSED
 // TODO: ENTER AN ILLION TEXTBOX
 // TODO: DROPBOX FOR ILLIONS
 // DONE: ALLOW NEGATIVE NUMBERS
@@ -19,21 +19,19 @@
 // TODO: MESSAGE IN RESULT BOX IF MORE THAN 999.999 MILLILLION (10^3006 - 1) - 'MAXVALUE' IS ALREADY SET
 // TODO: FIX ERRANT ROUNDING ON EXPONENTIALS (LOOK AT LIGHT SPEED KILOMETERS/SECOND)
 
+using ApplicationJsonSettings.Library;
 using LNVC_Library;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
-using System.Printing;
 using System.Reflection;
 using System.Speech.Synthesis;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Large_Number_Verbalizer_and_Calculator
@@ -44,6 +42,7 @@ namespace Large_Number_Verbalizer_and_Calculator
     public partial class MainWindow : Window
     {
         private const string _decimalCharacter = ".";  // TODO: CHANGE TO ENVIRONMENTAL VARIABLE
+        
         private readonly CalculatorClass _calculator = new();
         private readonly VerbalizeClass _verbalize = new(_decimalCharacter);
         private readonly RandomizerClass _random;
@@ -52,6 +51,8 @@ namespace Large_Number_Verbalizer_and_Calculator
         private readonly Button[] _binaryOperatorButtons;
         private readonly string[] _decimals = { "OemPeriod", "NumPeriod" };  // TODO: CHANGE TO ENVIRONMENT VARIBALE FOR DIFFERENT REGIONS
         private readonly SpeechSynthesizer _speechSynthesizer = new();
+        private readonly ApplicationJsonSettingsClass<AppSettingsClass> _settings = new();
+        private AppSettingsClass? _appSettings;
 
         private readonly string[] _NumericCharacters =
         {
@@ -74,10 +75,9 @@ namespace Large_Number_Verbalizer_and_Calculator
         public MainWindow()
         {
             InitializeComponent();
-            _binaryOperatorButtons = new Button[]
-            {
-                btnAND, btnOR, btnXOR, btnSHL, btnSHR
-            };
+            
+            _appSettings = _settings.GetSettings(SettingsJsonNotFound.Error, true);
+
             _maxTextLength = _verbalize.Illions[_verbalize.Illions.Count - 1].MaxLength;
             _maxValue = BigInteger.Pow(10, _maxTextLength) - 1;
             txtNumber1.MaxLength = _maxTextLength;
@@ -87,6 +87,11 @@ namespace Large_Number_Verbalizer_and_Calculator
             BuildLightMenuItems();
             _speechSynthesizer.SetOutputToDefaultAudioDevice();
             BuildSpeechMenu();
+
+            _binaryOperatorButtons = new Button[]
+             {
+                btnAND, btnOR, btnXOR, btnSHL, btnSHR
+             };
         }
 
         private void btn1Operand_Click(object sender, RoutedEventArgs e)
@@ -163,12 +168,18 @@ namespace Large_Number_Verbalizer_and_Calculator
             if (voices != null)
             {
                 bool first = true;
+                bool voiceInAppSettings = !string.IsNullOrWhiteSpace(_appSettings?.Voice);
+
                 foreach (InstalledVoice voice in voices)
                 {
-                    var menuItem = new MenuItem
-                        {
-                            Header = voice.VoiceInfo.Name, IsCheckable = true, IsChecked = first,
-                        };
+                    MenuItem menuItem = new()
+                    {
+                        Header = voice.VoiceInfo.Name,
+                        IsCheckable = true,
+                        IsChecked =
+                            (voiceInAppSettings == false && first == true) ||
+                            (voiceInAppSettings == true && voice.VoiceInfo.Name == _appSettings?.Voice)
+                    };
                     menuItem.Click += Speech_Click;
                     mnuSpeech.Items.Add(menuItem);
                     first = false;
@@ -328,7 +339,6 @@ namespace Large_Number_Verbalizer_and_Calculator
             }
         }
 
-
         private void SpeakVerbalized_Click(object sender, RoutedEventArgs e)
         {
             string? voiceName = SelectedVoiceName();
@@ -386,9 +396,27 @@ namespace Large_Number_Verbalizer_and_Calculator
             }
         }
 
+        private void mainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (object? item in mnuSpeech.Items)
+            {
+                if (item != null)
+                {
+                    var menuItem = (MenuItem)item;
+                    if (menuItem.IsChecked == true)
+                    {
+                        _appSettings ??= new AppSettingsClass();
+                        _appSettings.Voice = menuItem.Header.ToString();
+                        break;
+                    }
+                }
+            }
+
+            _settings.SaveSettings(_appSettings);
+        }
+
         private void mnuExit_Click(object sender, RoutedEventArgs e) =>
             Application.Current.Shutdown();
-
 
         private void txtNumber_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -429,5 +457,6 @@ namespace Large_Number_Verbalizer_and_Calculator
 
         private void txtResult_KeyUp(object sender, KeyEventArgs e) =>
             KillSpaceInTextBox(sender, e);
+
     }
 }

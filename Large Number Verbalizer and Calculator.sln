@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Large Number Verbalizer and
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{7049657E-CDD7-4290-A0D3-1010B87B9CDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LNVC_Library", "LNVC_Library\LNVC_Library.csproj", "{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LNVC_Library", "LNVC_Library\LNVC_Library.csproj", "{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationJsonSettings.Library", "ApplicationJsonSettings.Library\ApplicationJsonSettings.Library.csproj", "{FF5BE294-BDC7-4E9C-85D1-2D9F0217C186}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CF1E306-DAC0-4CBE-B3CB-FBD2DBE6F6A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF5BE294-BDC7-4E9C-85D1-2D9F0217C186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5BE294-BDC7-4E9C-85D1-2D9F0217C186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5BE294-BDC7-4E9C-85D1-2D9F0217C186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5BE294-BDC7-4E9C-85D1-2D9F0217C186}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

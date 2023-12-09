@@ -400,7 +400,7 @@ senonagintatrecentillion	1191
 septenonagintatrecentillion	1194
 octononagintatrecentillion	1197
 novenonagintatrecentillion	1200
-Quadringentillion	1203
+quadringentillion	1203
 unquadringentillion	1206
 duoquadringentillion	1209
 tresquadringentillion	1212
@@ -500,7 +500,7 @@ senonagintaquadringentillion	1491
 septenonagintaquadringentillion	1494
 octononagintaquadringentillion	1497
 novenonagintaquadringentillion	1500
-Quingentillion	1503
+quingentillion	1503
 unquingentillion	1506
 duoquingentillion	1509
 tresquingentillion	1512
