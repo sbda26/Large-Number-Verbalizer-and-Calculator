@@ -16,7 +16,7 @@
 // DONE: ALLOW NEGATIVE NUMBERS
 // TODO: ALLOW NEGATIVE NUMBERS FOR EXPONENTS (JAVA LIBRARY NOT WORKING)
 // TODO: HUMOROUS INTRO
-// TODO: MESSAGE IN RESULT BOX IF MORE THAN 999.999 MILLILLION (10^3006 - 1) - 'MAXVALUE' IS ALREADY SET
+// DONE: MESSAGE IN RESULT BOX IF MORE THAN 999.999 MILLILLION (10^3006 - 1) - 'MAXVALUE' IS ALREADY SET
 // TODO: FIX ERRANT ROUNDING ON EXPONENTIALS (LOOK AT LIGHT SPEED KILOMETERS/SECOND)
 
 using ApplicationJsonSettings.Library;
@@ -385,14 +385,22 @@ namespace Large_Number_Verbalizer_and_Calculator
             if (this.IsLoaded == true)
             {
                 var txtBoxNumber = (TextBox)sender;
-                string? expNtnRaw = _calculator.GetExponentialNotation(txtBoxNumber.Text, _decimalCharacter);
-                TextBlock tbExponentialNotation = GetExponentialNotationTextBlock(txtBoxNumber);
-                TextBox txtBoxVerbalized = GetVerbalizedTextBox(txtBoxNumber);
+                if (txtBoxNumber.Text.Length > _maxTextLength)
+                {
+                    txtBoxNumber.Text = null;
+                    MessageBox.Show($"ERROR: Result is more than 999.99999... {_verbalize.Illions[_verbalize.Illions.Count - 1].Name} - 1.");
+                }
+                else
+                {
+                    string? expNtnRaw = _calculator.GetExponentialNotation(txtBoxNumber.Text, _decimalCharacter);
+                    TextBlock tbExponentialNotation = GetExponentialNotationTextBlock(txtBoxNumber);
+                    TextBox txtBoxVerbalized = GetVerbalizedTextBox(txtBoxNumber);
 
-                tbExponentialNotation.Text = expNtnRaw;
-                txtBoxVerbalized.Text = _verbalize.VerbalizedName(txtBoxNumber.Text);
-                SetBinaryOperatorsEnabledState();
-                SetExponentialOperatorEnabledState(txtBoxNumber);
+                    tbExponentialNotation.Text = expNtnRaw;
+                    txtBoxVerbalized.Text = _verbalize.VerbalizedName(txtBoxNumber.Text);
+                    SetBinaryOperatorsEnabledState();
+                    SetExponentialOperatorEnabledState(txtBoxNumber);
+                }
             }
         }
 
